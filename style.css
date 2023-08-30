@@ -1,0 +1,30 @@
+body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+}
+
+.choices{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choices div{
+    background-color: blue;
+    padding: 16px;
+    margin: 20px;
+}
+
+.choices div:hover{
+    background-color: whitesmoke;
+}
+
+.score{
+    display:flex;
+}

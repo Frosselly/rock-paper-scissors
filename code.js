@@ -43,44 +43,90 @@ function findWinner(playerSelection, computerSelection) {
 }
 
 
-function game() {
-    let pcScore = 0;
-    let playerScore = 0;
+function game(playerSelection) {
 
-    for (let index = 0; index < 5; index++) {
+    computerSelection = getComputerChoice();
 
-        let computerSelection = getComputerChoice()
-        let playerSelection = prompt("Choose rock, paper or scissors: ")
+    let result = findWinner(playerSelection?.toLowerCase() || '', computerSelection)
+    console.log(result)
 
-        let result = findWinner(playerSelection.toLowerCase(), computerSelection)
-        console.log(result)
-
-        if (result[4] === "W")
-            playerScore++
-        else if (result[4] === "L")
-            pcScore++
-        else {
-            playerScore++
-            pcScore++
-        }
-
-        console.log("Computer score: " + pcScore)
-        console.log("Player score: " + playerScore)
-
+    if (result[4] === "W") {
+        addPoint('.playerScore')
+    }
+    else if (result[4] === "L") {
+        addPoint('.computerScore')
+    }
+    else {
+        addPoint('.playerScore')
+        addPoint('.computerScore')
     }
 
-    if(pcScore > playerScore)
-    {
-        console.log("Computer WON the game!!!")
+
+
+}
+
+function addPoint(className) {
+    const score = document.querySelector(className);
+    score.textContent = parseInt(score.textContent) + 1;
+    //console.log("Added to " + className + " currScore: " + score.textContent);
+}
+
+function findResults(playerScore, pcScore) {
+    const resultsBox = document.querySelector('.result');
+
+
+    if (pcScore > playerScore) {
+        resultsBox.textContent = "Computer WON the game!!!"
     }
-    else if(pcScore < playerScore)
-    {
-        console.log("You WON the game!!!")
+    else if (pcScore < playerScore) {
+        resultsBox.textContent = "You WON the game!!!"
     }
-    else{
-        console.log("Game ended in a TIE!!!")
+    else {
+        resultsBox.textContent = "Game ended in a TIE!!!"
     }
 }
+
+
+//let currRound = 0;
+
+
+const choice = document.querySelector('.choices');
+const choices = choice.querySelectorAll('div');
+
+let playerScore = 0;
+let pcScore = 0;
+
+
+choices.forEach((choice) => {
+    choice.addEventListener('click', () => {
+        
+
+        if (playerScore < 5 && pcScore < 5) {
+            game(choice.classList[0].toString());
+            //addPoint('.round')
+        }
+
+        playerScore = parseInt(document.querySelector('.playerScore').textContent);
+        pcScore = parseInt(document.querySelector('.computerScore').textContent);
+
+        if (playerScore == 5 || pcScore == 5)
+            findResults();
+    })
+})
+
+
+
+
+
+// const choice = document.querySelector('.choices');
+// const choices = choice.querySelectorAll('div');
+
+// choices.forEach((choice) => {
+//     choice.addEventListener('click', () => {
+//         choice.classList[0];
+//     })
+// })
+
 
 
 game()
