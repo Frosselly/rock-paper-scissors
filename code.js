@@ -25,7 +25,7 @@ function getComputerChoice() {
 
 
 function findWinner(playerSelection, computerSelection) {
-    let result = "undefined.."
+    let result = null;
 
     if (playerSelection === computerSelection) {
         result = "It's a TIE!"
@@ -46,9 +46,19 @@ function findWinner(playerSelection, computerSelection) {
 function game(playerSelection) {
 
     computerSelection = getComputerChoice();
+    playerSelection = playerSelection?.toLowerCase() || '';
 
-    let result = findWinner(playerSelection?.toLowerCase() || '', computerSelection)
+    if(playerSelection.trim() == '')
+        return null;
+
+    let result = findWinner(playerSelection, computerSelection)
+
     console.log(result)
+    if(!result)
+    {
+        console.log("ERROR IN TAKING INPUT")
+    }
+   
 
     if (result[4] === "W") {
         addPoint('.playerScore')
@@ -73,7 +83,6 @@ function addPoint(className) {
 
 function findResults(playerScore, pcScore) {
     const resultsBox = document.querySelector('.result');
-
 
     if (pcScore > playerScore) {
         resultsBox.textContent = "Computer WON the game!!!"
@@ -110,7 +119,7 @@ choices.forEach((choice) => {
         pcScore = parseInt(document.querySelector('.computerScore').textContent);
 
         if (playerScore == 5 || pcScore == 5)
-            findResults();
+            findResults(playerScore, pcScore);
     })
 })
 

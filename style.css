@@ -16,13 +16,21 @@ body{
 }
 
 .choices div{
-    background-color: blue;
+    background-color: whitesmoke;
     padding: 16px;
     margin: 20px;
+    height: 325px;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    box-shadow: 3px 3px 5px gray;
 }
 
 .choices div:hover{
-    background-color: whitesmoke;
+    background-color: darkgray;
 }
 
 .score{
